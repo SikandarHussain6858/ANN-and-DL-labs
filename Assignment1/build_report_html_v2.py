@@ -1,0 +1,542 @@
+html_content = r"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CS-320 Assignment #1 Programming Report - Muhammad Sikandar Hussain (502808)</title>
+
+<!-- MathJax for rendering professional LaTeX equations -->
+<script>
+window.MathJax = {
+  tex: {
+    inlineMath: [['$', '$'], ['\\(', '\\)']],
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true
+  },
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<style>
+  @page {
+    size: A4 portrait;
+    margin: 14mm 14mm 14mm 14mm;
+    @bottom-right {
+      content: "Page " counter(page) " of " counter(pages);
+      font-size: 8pt;
+      color: #718096;
+    }
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1a202c;
+    line-height: 1.45;
+    font-size: 9.3pt;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .header-container {
+    border-bottom: 2.5px solid #003366;
+    padding-bottom: 8px;
+    margin-bottom: 12px;
+  }
+
+  .inst-title {
+    font-size: 13pt;
+    font-weight: 800;
+    color: #003366;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+  }
+
+  .inst-sub {
+    font-size: 10pt;
+    font-weight: 600;
+    color: #4a5568;
+    margin: 2px 0 0 0;
+  }
+
+  .course-title {
+    font-size: 11.5pt;
+    font-weight: 700;
+    color: #1a202c;
+    margin-top: 5px;
+    margin-bottom: 2px;
+  }
+
+  .assign-badge {
+    display: inline-block;
+    background-color: #003366;
+    color: #ffffff;
+    padding: 3px 8px;
+    font-size: 8pt;
+    font-weight: 700;
+    border-radius: 3px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .meta-box {
+    background-color: #f7fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #003366;
+    padding: 8px 12px;
+    margin: 10px 0 15px 0;
+    border-radius: 3px;
+  }
+
+  .meta-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .meta-table td {
+    padding: 2px 6px;
+    font-size: 8.8pt;
+    vertical-align: top;
+  }
+
+  .meta-label {
+    font-weight: 700;
+    color: #2d3748;
+    width: 20%;
+  }
+
+  .meta-val {
+    color: #1a202c;
+  }
+
+  h2 {
+    color: #003366;
+    font-size: 11.5pt;
+    font-weight: 700;
+    border-bottom: 1.5px solid #cbd5e0;
+    padding-bottom: 3px;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    page-break-after: avoid;
+  }
+
+  h3 {
+    color: #2b6cb0;
+    font-size: 10pt;
+    font-weight: 700;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    page-break-after: avoid;
+  }
+
+  p {
+    margin: 0 0 5px 0;
+    text-align: justify;
+  }
+
+  ul, ol {
+    margin: 3px 0 6px 16px;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 2px;
+  }
+
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 10px 0;
+    font-size: 8.8pt;
+    page-break-inside: avoid;
+  }
+
+  table.data-table th, table.data-table td {
+    border: 1px solid #cbd5e0;
+    padding: 4px 6px;
+    text-align: left;
+  }
+
+  table.data-table th {
+    background-color: #ebf8ff;
+    color: #2b6cb0;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  table.data-table tr:nth-child(even) {
+    background-color: #f7fafc;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .fig-container {
+    text-align: center;
+    margin: 8px 0;
+    page-break-inside: avoid;
+  }
+
+  .fig-container img {
+    max-width: 95%;
+    height: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  .fig-caption {
+    font-size: 8.2pt;
+    color: #4a5568;
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  .callout-box {
+    background-color: #f0fff4;
+    border: 1px solid #c6f6d5;
+    border-left: 4px solid #38a169;
+    padding: 6px 10px;
+    margin: 6px 0;
+    border-radius: 3px;
+    font-size: 8.8pt;
+  }
+
+  .callout-note {
+    background-color: #ebf8ff;
+    border: 1px solid #bee3f8;
+    border-left: 4px solid #3182ce;
+    padding: 6px 10px;
+    margin: 6px 0;
+    border-radius: 3px;
+    font-size: 8.8pt;
+  }
+
+  .page-break {
+    page-break-before: always;
+  }
+
+  .math-display {
+    text-align: center;
+    margin: 5px 0;
+  }
+
+  pre {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    padding: 8px 10px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 8.3pt;
+    line-height: 1.35;
+    overflow-x: auto;
+    margin: 6px 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- INSTITUTIONAL HEADER -->
+<div class="header-container">
+  <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+    <div>
+      <div class="inst-title">National University of Sciences & Technology (NUST)</div>
+      <div class="inst-sub">School of Electrical Engineering & Computer Science (SEECS)</div>
+      <div class="course-title">CS-320: Artificial Neural Networks & Deep Learning</div>
+      <div class="assign-badge">Assignment #1 Programming Report &bull; Fall 2026</div>
+    </div>
+    <div style="text-align: right; font-size: 8.5pt; color: #718096;">
+      <div><strong>Due Date:</strong> Sunday, Oct 18, 2026</div>
+      <div><strong>Total Marks:</strong> 100</div>
+    </div>
+  </div>
+</div>
+
+<!-- STUDENT METADATA & PERSONALIZED PARAMETERS -->
+<div class="meta-box">
+  <table class="meta-table">
+    <tr>
+      <td class="meta-label">Student Name:</td>
+      <td class="meta-val"><strong>Muhammad Sikandar Hussain</strong></td>
+      <td class="meta-label">CMS / Student ID:</td>
+      <td class="meta-val"><strong>502808</strong></td>
+    </tr>
+    <tr>
+      <td class="meta-label">Personalized Digits:</td>
+      <td class="meta-val">Last 3 digits $r = \mathbf{808}$; &nbsp; Digits: $a = \mathbf{8}, \; b = \mathbf{0}, \; c = \mathbf{8}$</td>
+      <td class="meta-label">Submission Files:</td>
+      <td class="meta-val"><code>CS320_F2026_Assign1_502808.pdf</code> &bull; <code>CS320_F2026_Assign1_502808.ipynb</code></td>
+    </tr>
+    <tr>
+      <td class="meta-label">Assigned Parameters:</td>
+      <td class="meta-val" colspan="3">
+        <strong>Q1:</strong> $\alpha = 0.05 + 808/10000 = \mathbf{0.1308}$ &bull; 
+        <strong>Q7:</strong> Dataset noise $= \mathbf{0.18}$, hidden units $h = \mathbf{3}$ &bull; 
+        <strong>Q8:</strong> Failure case $q = 808 \bmod 3 = \mathbf{1}$ (Dead ReLU via Negative Bias)
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="callout-note">
+  <strong>Submission Structure Note:</strong><br>
+  Questions 1 through 6 are analytical and theoretical derivations, solved by hand on paper and submitted in the handwritten portion of the assignment. This report and the accompanying Jupyter Notebook (<code>CS320_F2026_Assign1_502808.ipynb</code>) contain the required coding implementations, verification plots, training diagnostics, and experimental evaluations:
+  <ol>
+    <li><strong>Question 1 (Coding Part):</strong> Numerical verification plot for personalized activation $g(z)$ and derivative $g'(z)$.</li>
+    <li><strong>Questions 2 to 6:</strong> Completed by hand in handwritten submission pages.</li>
+    <li><strong>Question 7 (Programming):</strong> From-scratch ANN in NumPy, numerical gradient checking, training curves, peak epoch analysis, and learned decision boundary.</li>
+    <li><strong>Question 8 (Programming):</strong> Dead ReLU failure diagnosis ($b_1 = -3.0$) vs single design repair ($b_1 = 0.0$), comparison table, and mathematical explanation.</li>
+  </ol>
+</div>
+
+<!-- ======================================================================= -->
+<!-- QUESTION 1 -->
+<!-- ======================================================================= -->
+<h2>Question 1: Activation Function Forensics (Plotting) [10 Marks]</h2>
+
+<p>Personalized piecewise activation function with $\alpha = 0.05 + 808/10000 = \mathbf{0.1308}$:</p>
+<div class="math-display">
+$$g(z) = \begin{cases} 0.1308 z & \text{for } z < 0 \\ \tanh(z) + 0.2z & \text{for } z \ge 0 \end{cases}, \qquad g'(z) = \begin{cases} 0.1308 & \text{for } z < 0 \\ 1.2 - \tanh^2(z) & \text{for } z > 0 \end{cases}$$
+</div>
+<p><em>(Derivations of $g'(z)$, continuity/differentiability limits at $z=0$, and activation properties are in the handwritten submission.)</em></p>
+
+<div class="fig-container">
+  <img src="figures/q1_activation_plot.png" alt="Activation and Derivative Plot">
+  <div class="fig-caption">Figure 1.1: Verification plot of personalized $g(z)$ ($\alpha = 0.1308$) and derivative $g'(z)$ evaluated over $-5 \le z \le 5$, compared with Sigmoid, Tanh, ReLU, and Leaky ReLU. Note the non-vanishing gradient floor ($\ge 0.1308$) and directional derivative kink at the origin ($0.1308 \ne 1.2000$).</div>
+</div>
+
+<!-- ======================================================================= -->
+<!-- QUESTIONS 2 TO 6 SUMMARY -->
+<!-- ======================================================================= -->
+<h2>Questions 2 to 6: Hand-Written Theory & Derivations</h2>
+<p>The following problems involve manual calculations, step-by-step derivations, and architectural diagnosis tables, all of which are completed by hand in the handwritten submission:</p>
+<ul>
+  <li><strong>Question 2: Loss Function Investigation [10 Marks]</strong> &mdash; Hand calculations of MSE, MAE, and Huber loss for $e \in \{-3.0, -1.0, 0.5, 2.808\}$, $\delta = 1.808$, derivative derivations, and outlier robustness analysis.</li>
+  <li><strong>Question 3: Cross-Entropy and Output-Layer Gradients [10 Marks]</strong> &mdash; Chain rule algebraic proof of $\frac{\partial L}{\partial z} = \hat{y} - y$ for binary Sigmoid+BCE (Part A) and multiclass Softmax+CCE (Part B), numerical evaluations, and logit perturbation.</li>
+  <li><strong>Question 4: Correct the Wrong Network Design [10 Marks]</strong> &mdash; Architectural failure diagnosis table for the 6 supplied configurations (house pricing, spam classification, autonomous driving steering, multi-disease diagnosis, SVM margin classifier, and outlier regression).</li>
+  <li><strong>Question 5: Forward + Backpropagation by Hand [20 Marks]</strong> &mdash; Manual execution of complete forward pass 1, backpropagation matrix gradients, single gradient descent update ($\eta = 0.1$), and second forward pass verifying loss decrease ($\Delta L = -0.026392$).</li>
+  <li><strong>Question 6: Gradient Descent Behavior [10 Marks]</strong> &mdash; Four-step iteration tables for $\eta = 0.05$ (convergence) and $\eta = 0.50$ (divergence) on $C(w_1, w_2) = w_1^2 + 2.808 w_2^2$, Hessian eigenvalue curvature analysis ($\eta < 2/\lambda_{\max} = 0.3561$), and Taylor series descent direction proof.</li>
+</ul>
+
+<div class="page-break"></div>
+
+<!-- ======================================================================= -->
+<!-- QUESTION 7 -->
+<!-- ======================================================================= -->
+<h2>Question 7: Programming &mdash; ANN from Scratch + Gradient Check [20 Marks]</h2>
+
+<p>Implementation of a fully connected neural network strictly from scratch using NumPy (no PyTorch, TensorFlow, or Autograd permitted).</p>
+<ul>
+  <li><strong>Dataset:</strong> Two-Moons generated via <code>make_moons(n_samples=300, noise=0.18, random_state=808)</code>.
+    <ul>
+      <li>$noise = 0.10 + (808 \bmod 20)/100 = 0.10 + 0.08 = \mathbf{0.18}$</li>
+      <li>Hidden layer units: $h = 3 + (808 \bmod 4) = 3 + 0 = \mathbf{3}$ neurons</li>
+    </ul>
+  </li>
+  <li><strong>Architecture:</strong> $2 \to 3 \to 1$ with $\tanh$ hidden activation and $\sigma$ output activation, trained via ordinary batch gradient descent ($\eta = 0.5$, 3000 epochs).</li>
+  <li><strong>Backpropagation:</strong> Explicit analytical matrix equations $dZ_2, dW_2, db_2, dA_1, dZ_1, dW_1, db_1$ with shape assertions.</li>
+</ul>
+
+<h3>7.1 Numerical Gradient Check & Sanity Check</h3>
+<p>To verify the mathematical correctness of the backward pass implementation before full training, two rigorous checks were performed:</p>
+<ol>
+  <li><strong>Numerical Gradient Checking:</strong> Numerical derivatives were computed using two-sided finite differences:
+    $$\frac{\partial J}{\partial \theta_i} \approx \frac{J(\theta_i + \epsilon) - J(\theta_i - \epsilon)}{2\epsilon}, \qquad \epsilon = 10^{-7}$$
+    The relative Euclidean distance between analytic backpropagation gradients and numerical gradients evaluated to:
+    $$\text{Relative Difference} = \frac{\|\nabla_{\text{analytic}} - \nabla_{\text{numerical}}\|}{\|\nabla_{\text{analytic}}\| + \|\nabla_{\text{numerical}}\|} = \mathbf{6.75 \times 10^{-9}} \ll 10^{-7}$$
+    This confirms with machine precision that the analytical backward pass implementation has zero algebraic or implementation bugs.
+  </li>
+  <li><strong>Single-Step Sanity Check:</strong> A single gradient descent update from the initial parameters with $\eta = 0.5$ showed:
+    $$\text{Initial Loss} = 0.708514 \longrightarrow \text{Loss after 1 step} = 0.697401 \quad (\Delta L = \mathbf{-0.011113} < 0)$$
+    Confirming that the network takes a valid step in the descent direction.
+  </li>
+</ol>
+
+<h3>7.2 Training Diagnostics & Peak Gradient Epochs</h3>
+<p>The network was trained for 3,000 epochs with ordinary batch gradient descent ($\eta = 0.5$).</p>
+<table class="data-table">
+  <tr>
+    <th>Metric</th>
+    <th>Value</th>
+    <th>Observations & Dynamics</th>
+  </tr>
+  <tr>
+    <td><strong>Initial BCE Loss</strong></td>
+    <td><strong>0.7085</strong></td>
+    <td>Slightly above $\ln 2 \approx 0.6931$ due to random weight initialization ($W \sim 0.1 \cdot \mathcal{N}(0, 1)$).</td>
+  </tr>
+  <tr>
+    <td><strong>Final BCE Loss</strong></td>
+    <td><strong>0.2554</strong></td>
+    <td>Monotonically decreased, indicating smooth convergence without instability.</td>
+  </tr>
+  <tr>
+    <td><strong>Final Training Accuracy</strong></td>
+    <td><strong>88.00%</strong></td>
+    <td>Accurately captures the curved crescent moon topology despite using only 3 hidden neurons.</td>
+  </tr>
+  <tr>
+    <td><strong>Peak $\|dW^{(1)}\|$</strong></td>
+    <td><strong>0.134456</strong></td>
+    <td><strong>Occurs at Epoch 22.</strong> Early in training, as $W^{(2)}$ grows and hidden neurons operate in their maximal-slope linear regime ($\tanh' \approx 1.0$), backpropagated error peaks.</td>
+  </tr>
+  <tr>
+    <td><strong>Peak $\|dW^{(2)}\|$</strong></td>
+    <td><strong>0.144484</strong></td>
+    <td><strong>Occurs at Epoch 23.</strong> Driven by the simultaneous growth of hidden activations $A^{(1)}$ and high residual prediction error $dZ^{(2)}$.</td>
+  </tr>
+</table>
+
+<div class="fig-container">
+  <img src="figures/q7_training_curves.png" alt="Training Diagnostics">
+  <div class="fig-caption">Figure 7.1: Training diagnostics over 3,000 epochs: BCE loss, classification accuracy, hidden weight gradient norm $\|dW^{(1)}\|$ (peak at epoch 22), and output weight gradient norm $\|dW^{(2)}\|$ (peak at epoch 23).</div>
+</div>
+
+<div class="fig-container">
+  <img src="figures/q7_decision_boundary.png" alt="Decision Boundary">
+  <div class="fig-caption">Figure 7.2: Learned non-linear decision boundary separating the two moon classes (noise = 0.18, 300 samples, random_state = 808). Final classification accuracy: 88.00%.</div>
+</div>
+
+<h3>7.3 Final Confusion Matrix</h3>
+<p>Evaluation of predictions $\hat{y} = \mathbb{I}(A^{(2)} > 0.5)$ against true labels $y \in \{0, 1\}$:</p>
+<table class="data-table" style="max-width: 450px; margin: 8px auto;">
+  <tr>
+    <th rowspan="2" style="vertical-align: middle;">Actual Class</th>
+    <th colspan="2">Predicted Class</th>
+    <th rowspan="2" style="vertical-align: middle;">Class Accuracy</th>
+  </tr>
+  <tr>
+    <th>Pred 0</th>
+    <th>Pred 1</th>
+  </tr>
+  <tr>
+    <td><strong>Class 0 (150 samples)</strong></td>
+    <td class="center"><strong>133</strong> (TN)</td>
+    <td class="center">17 (FP)</td>
+    <td class="center">88.67%</td>
+  </tr>
+  <tr>
+    <td><strong>Class 1 (150 samples)</strong></td>
+    <td class="center">19 (FN)</td>
+    <td class="center"><strong>131</strong> (TP)</td>
+    <td class="center">87.33%</td>
+  </tr>
+</table>
+
+<div class="page-break"></div>
+
+<!-- ======================================================================= -->
+<!-- QUESTION 8 -->
+<!-- ======================================================================= -->
+<h2>Question 8: Programming &mdash; Failure Diagnosis and Repair [10 Marks]</h2>
+
+<p><strong>Assigned Failure Case:</strong> $q = r \bmod 3 = 808 \bmod 3 = \mathbf{1} \implies$ <strong>ReLU hidden layer with strongly negative initial bias (Dead ReLU).</strong></p>
+
+<h3>8.1 Failure Setup & Single Design Modification</h3>
+<ul>
+  <li><strong>Failure Setup:</strong> Identical dataset ($N=300, noise=0.18, r=808$) and architecture ($2 \to 3 \to 1$) with $\text{ReLU}(z) = \max(0, z)$ hidden activation. Hidden biases are initialized to a strongly negative value:
+    $$b^{(1)} = \begin{bmatrix} -3.0 \\ -3.0 \\ -3.0 \end{bmatrix}$$
+  </li>
+  <li><strong>Single Design Repair:</strong> Only <strong>ONE</strong> design choice is modified:
+    <strong>Hidden bias initialization is changed to $b^{(1)} = \begin{bmatrix} 0.0 \\ 0.0 \\ 0.0 \end{bmatrix}$.</strong>  
+    All other parameters (initial weights, learning rate $\eta = 0.5$, epochs = 3,000, dataset, and random seed 808) remain strictly unchanged.
+  </li>
+</ul>
+
+<div class="fig-container">
+  <img src="figures/q8_failure_vs_repair.png" alt="Failure vs Repair Comparison">
+  <div class="fig-caption">Figure 8.1: Quantitative comparison of Dead ReLU failure ($b_1 = -3.0$, red) versus single design repair ($b_1 = 0.0$, green/blue) across loss, accuracy, gradient norms, fraction of dead units, and side-by-side decision boundaries.</div>
+</div>
+
+<h3>8.2 Quantitative Before-vs-After Comparison</h3>
+<table class="data-table">
+  <tr>
+    <th>Metric / Parameter</th>
+    <th>Failure Case ($b^{(1)} = -3.0$)</th>
+    <th>Repaired Case ($b^{(1)} = 0.0$)</th>
+    <th>Diagnostic Interpretation</th>
+  </tr>
+  <tr>
+    <td><strong>Design Choice Modified</strong></td>
+    <td>$b^{(1)} = -3.0$ (strongly negative)</td>
+    <td>$b^{(1)} = 0.0$ (zero initialized)</td>
+    <td>Strict single parameter change</td>
+  </tr>
+  <tr>
+    <td><strong>Initial BCE Loss</strong></td>
+    <td><strong>0.6931</strong> ($\ln 2$)</td>
+    <td><strong>0.7005</strong></td>
+    <td>Both start near random chance level</td>
+  </tr>
+  <tr>
+    <td><strong>Final BCE Loss</strong></td>
+    <td><strong>0.6931</strong> (completely flat)</td>
+    <td><strong>0.2558</strong></td>
+    <td>Loss decreases by over 63% after repair</td>
+  </tr>
+  <tr>
+    <td><strong>Final Accuracy</strong></td>
+    <td><strong>50.00%</strong> (chance guess)</td>
+    <td><strong>88.00%</strong></td>
+    <td>Repaired model successfully classifies data</td>
+  </tr>
+  <tr>
+    <td><strong>Final Hidden Gradient $\|dW^{(1)}\|$</strong></td>
+    <td><strong>0.00000000</strong> (identically zero)</td>
+    <td><strong>0.00000644</strong></td>
+    <td>Gradient flow restored through hidden layer</td>
+  </tr>
+  <tr>
+    <td><strong>Fraction of Dead ReLU Units</strong></td>
+    <td><strong>100.0%</strong> (all 3 neurons dead)</td>
+    <td><strong>0.0%</strong> permanently dead</td>
+    <td>Active units revive and participate in learning</td>
+  </tr>
+</table>
+
+<h3>8.3 Mathematical Explanation of Failure & Repair</h3>
+<ol>
+  <li><strong>Mathematical Mechanism of Failure:</strong>  
+    The pre-activation of hidden neuron $j$ for input sample $x$ is:
+    $$z_j^{(1)} = w_j^{(1)} x + b_j^{(1)}$$
+    Because inputs satisfy $\|x\| \lesssim 2.0$ and weights are sampled from a small Gaussian distribution ($\sigma = 0.1$), the linear product $|w_j^{(1)} x| \lesssim 0.2$. With $b_j^{(1)} = -3.0$:
+    $$z_j^{(1)} \approx 0.2 - 3.0 = -2.8 < 0 \quad \forall x \in \mathcal{D}$$
+    Consequently, the forward ReLU activation evaluates to zero for every single data point:
+    $$a_j^{(1)} = \max(0, z_j^{(1)}) = 0 \quad \forall x \in \mathcal{D}$$
+    During backward propagation, the local derivative of the ReLU function is:
+    $$\text{ReLU}'(z) = \begin{cases} 1 & \text{if } z > 0 \\ 0 & \text{if } z \le 0 \end{cases}$$
+    Since $z_j^{(1)} < 0$ globally, $\text{ReLU}'(Z_j^{(1)}) = \mathbf{0}$. The pre-activation gradient becomes:
+    $$dZ^{(1)} = dA^{(1)} \odot \text{ReLU}'(Z^{(1)}) = dA^{(1)} \odot \mathbf{0} = \mathbf{0}$$
+    Substituting into parameter gradient equations:
+    $$dW^{(1)} = \frac{1}{m} dZ^{(1)} X^T = \mathbf{0}, \quad db^{(1)} = \frac{1}{m} \sum dZ^{(1)} = \mathbf{0}$$
+    Under gradient descent update rules:
+    $$W^{(1)} \leftarrow W^{(1)} - \eta (\mathbf{0}) = W^{(1)}, \quad b^{(1)} \leftarrow b^{(1)} - \eta (\mathbf{0}) = b^{(1)}$$
+    <strong>The hidden layer weights and biases remain permanently frozen for all epochs.</strong> The network is locked in a zero-gradient dead state, unable to learn any non-linear features, resulting in flat loss ($0.6931 = \ln 2$) and chance accuracy ($50.00\%$).
+  </li>
+  <li><strong>Mathematical Mechanism of Repair:</strong>  
+    By setting $b_j^{(1)} = 0.0$, the pre-activations become $z_j^{(1)} = w_j^{(1)} x$. Because the initial weights have zero mean, approximately 50% of the training points yield positive pre-activations ($z_j^{(1)} > 0$).  
+    For these points, $\text{ReLU}'(z_j^{(1)}) = 1.0$, which yields non-zero gradients:
+    $$dZ^{(1)} = dA^{(1)} \odot \mathbf{1} \ne \mathbf{0} \implies dW^{(1)} \ne \mathbf{0}$$
+    This immediately unlocks backpropagation through the hidden layer, allowing gradient descent to actively shape the hidden feature space and driving accuracy up to <strong>88.00%</strong>.
+  </li>
+</ol>
+
+<hr style="border: 0; border-top: 2px solid #003366; margin: 18px 0 10px 0;">
+<div style="display: flex; justify-content: space-between; font-size: 8.5pt; color: #718096;">
+  <div>National University of Sciences & Technology (NUST) &bull; SEECS</div>
+  <div>CS-320 ANN & Deep Learning &bull; Assignment #1</div>
+  <div>CMS ID: 502808 &bull; Muhammad Sikandar Hussain</div>
+</div>
+
+</body>
+</html>
+"""
+
+with open("report.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("Generated clean report.html successfully.")
